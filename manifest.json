@@ -1,0 +1,9 @@
+{
+  "name": "Hold That Thought",
+  "version": "1.0",
+  "description": "Enter Hold That Thought description here.",
+  "manifest_version": 2,
+  "browser_action": {
+    "default_popup": "index.html"
+  }
+}
