@@ -1,47 +1,74 @@
-// fetch("https://api.github.com/users/ssaunier")
-//   .then(response => response.json())
-//   .then(data => console.log(data))
+console.log("content.js running...");
 
-const flashcard = {
-  question: "How do you install gems you added to your Gemfile?",
-  answer: "Kill any web server running (Ctrl + C). Run bundle install. Restart the Rails server with rails s"
+// Fetch flashcards with API
+const flashcardsArray = [
+  {
+    question: "How do you install gems you added to your Gemfile?",
+    answer: "Kill any web server running (Ctrl + C). Run bundle install. Restart the Rails server with rails s."
+  },
+  {
+    question: "What does this return? rails gnerate controller pages features pricing contact",
+    answer: "It generates a PagesController with three actions features, pricing & contact and associated routes and views."
+  },
+  {
+    question: "Which information does rails routes display?",
+    answer: `rails routes show you a list of your routes with details:
+                * Prefix is the rails path prefix of the associated route
+                * Verb is the HTTP verb of the route
+                * URI Pattern is the path of the route
+                * Controller#Action are targeted controller and method`
+  }
+];
+
+let flashcardViewUrl = "";
+function setflashcardViewUrl(string) {
+  flashcardViewUrl = string;
+  console.log(`flashcardViewUrl set successfully: ${flashcardViewUrl}`);
 }
 
-// Set DOM elements
-const flashcard_window = document.getElementById("flashcard_window")
+let iframe =`
+  <iframe style="position: absolute; right: 16px; top: 16px;" src="chrome-extension://ginifbbapdgbbglelocagabffednffek/views/flashcard.html" height="369" width="300" frameborder="0">This is not working</iframe>
+`;
 
-// Add listener to 'flip card' button
-function addListenerToBtn() {
-  const flip_card_btn = document.getElementById("flip_card_btn");
-  flip_card_btn.addEventListener("click", console.log("button clicked"));
+function initFlashcardView() {
+  let body = document.getElementsByTagName("body")[0];
+  let head = document.getElementsByTagName("head")[0];
+  body.innerHTML = iframe;
 }
 
+// Start listening for messages
+chrome.runtime.onMessage.addListener(
+  function(message, sender, sendResponse) {
+    console.log("Receiving message from background.js...")
+    console.log(message);
+    if (message.response == "blacklisted") {
+      // 1. Set base URL for iframe views
+      setflashcardViewUrl(message.flashcardViewUrl);
+      // 2. Initiate the view
+      initFlashcardView();
+    }
+    else {
+      console.log(message);
+    };
+  });
 
-// Build question HTML
-function showQuestion() {
-  let question_HTML =
-  `<div class="flashcard-container">
-    <div class="flashcard-category">
-      <img src="images/rails-logo.svg" alt="Rails logo" width="">
-    </div>
-    <div id="question">${flashcard["question"]}</div>
-    <textarea class="user-answer" rows="4" placeholder="Enter your answer here"></textarea>
-    <a href="#" class="btn btn-light" id="flip_card_btn">
-      <i class="fas fa-redo"></i>
-      flip card
-    </a>
-  </div>`;
-  flashcard_window.innerHTML = "";
-  flashcard_window.insertAdjacentHTML('beforeend', question_HTML);
-}
-
-showQuestion();
-
+// Then send message from content.js (upon refresh) to background script
+// (Requires extension ID - can we set this automatically?)
+chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", { request: "blacklist" });
 
 
 
 
-// Build answer HTML
+
+
+
+
+
+
+
+
+
+
 
 
 
