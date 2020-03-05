@@ -27,13 +27,14 @@ function setflashcardViewUrl(string) {
 }
 
 let iframe =`
-  <iframe style="position: absolute; right: 16px; top: 16px;" src="chrome-extension://ginifbbapdgbbglelocagabffednffek/views/flashcard.html" height="369" width="300" frameborder="0">This is not working</iframe>
+  <iframe style="position: absolute; right: 16px; top: 16px; z-index: 1000000; border-radius: 8px; box-shadow: 2px 3px 10px grey" src="chrome-extension://ginifbbapdgbbglelocagabffednffek/views/flashcard.html" height="369" width="300" frameborder="0">This is not working</iframe>
 `;
 
 function initFlashcardView() {
   let body = document.getElementsByTagName("body")[0];
   let head = document.getElementsByTagName("head")[0];
-  body.innerHTML = iframe;
+  // body.innerHTML = iframe;
+  body.insertAdjacentHTML('afterbegin', iframe);
 }
 
 // Start listening for messages

@@ -3,7 +3,6 @@
 #flashcard-window {
   width: 300px;
   background-color: rgba(0,0,0,0.3);
-  border-radius: 8px;
   position: absolute;
 /*  right: 16px;
   top: 16px;*/
@@ -11,6 +10,7 @@
   top: 0px;
   padding: 24px;
   font-family: 'Open Sans', sans-serif;
+  box-shadow: 2px 3px 10px grey;
 }
 
 .flashcard-category {
