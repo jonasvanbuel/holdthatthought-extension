@@ -1,52 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans|Roboto+Mono&display=swap');
 
-#flashcard-window {
-  width: 300px;
-  background-color: rgba(0,0,0,0.3);
-  position: absolute;
-/*  right: 16px;
-  top: 16px;*/
-  left: 0px;
-  top: 0px;
-  padding: 24px;
-  font-family: 'Open Sans', sans-serif;
-  box-shadow: 2px 3px 10px grey;
-}
-
-.flashcard-category {
-  margin-bottom: 20px;
-}
-
-.flashcard-category > img {
-  width: 60px;
-  color: white;
-}
-
-.code-block {
-  background-color: rgba(0,0,0,0.7);
-  border-radius: 8px;
-  margin-bottom: 12px;
-  color: white;
-  font-family: 'Roboto Mono', monospace;
-  font-size: 12px;
-  padding: 12px;
-  width: 100%;
-}
-
-.user-answer {
-  border-radius: 8px;
-  border: none;
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-}
-
-.btn-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 16px;
-}
-
 a {
   background-color: rgba(0,0,0,0.7);
   border-radius: 18px;
@@ -65,3 +18,73 @@ a:hover {
 p {
   margin-bottom: 12px;
 }
+
+.flashcard-window {
+  width: 300px;
+  background-color: #bbbbbb;
+  border-radius: 8px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  padding: 24px;
+  font-family: 'Open Sans', sans-serif;
+  box-shadow: 0 0 8px #1e1e1e;
+}
+
+.flashcard-category {
+  margin-bottom: 20px;
+}
+
+#rails-logo {
+  width: 60px;
+}
+
+.text-qa {
+  font-size: 14px;
+}
+
+.code-block {
+  background-color: #3c3d3c;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  padding: 12px;
+  width: 276px;
+}
+
+.user-answer {
+  border-radius: 8px;
+  border: none;
+  width: 276px;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.flip-btn,
+.next-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  margin: 0px 8px;
+}
+
+.redo-solid {
+  height: 16px;
+  margin-right: 8px;
+}
+
+.hidden {
+  display: none;
+}
+

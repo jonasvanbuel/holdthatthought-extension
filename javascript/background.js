@@ -6,6 +6,7 @@ const blacklist = [
   "https://www.facebook.com/"
 ];
 
+let baseUrl = chrome.runtime.getURL('/');
 
 // Start listening for messages
 chrome.runtime.onMessage.addListener(
@@ -15,7 +16,7 @@ chrome.runtime.onMessage.addListener(
       // Check url agains blacklist within background.js
       blacklist.forEach((website) => {
         if (website == sender.url) {
-          chrome.tabs.sendMessage(sender.tab.id, { response: "blacklisted", flashcardViewUrl: `${chrome.runtime.getURL('views/flashcard.html')}` });
+          chrome.tabs.sendMessage(sender.tab.id, { response: "blacklisted", baseUrl: baseUrl });
         };
       });
     }
@@ -37,7 +38,7 @@ chrome.runtime.onMessage.addListener(
 
 // }, { url: [{hostSuffix: 'instagram.com'}] });
 
-console.log(chrome.runtime.getURL('views/flashcard.html'));
+console.log(`baseUrl: ${baseUrl}`);
 
 
 
