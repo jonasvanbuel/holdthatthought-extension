@@ -25,6 +25,29 @@ const flashcardsArray = [
 
 let index = 0;
 
+function loadBackgroundHTML() {
+
+  console.log("Loading background html...");
+
+  fetch('chrome-extension://ginifbbapdgbbglelocagabffednffek/views/background.html')
+    .then(response => response.text())
+    .then((data) => {
+      // // 2. Parse html string to DOM tree
+      // let domparser = new DOMParser();
+      // htmlDoc = domparser.parseFromString(data, 'text/xml');
+
+
+      // let question = htmlDoc.querySelector("#question");
+      // // 3. Insert new question
+      // question.innerHTML = flashcardsArray[index].question;
+      // // 4. Serialize DOM tree to html string
+      // let XMLS = new XMLSerializer();
+      // let updatedQuestion = XMLS.serializeToString(htmlDoc);
+      body.style.margin = "0";
+      body.insertAdjacentHTML('beforeend', data);
+    });
+}
+
 function loadFlashcardStyling() {
 
   console.log("Loading flashcard styling...");
@@ -40,7 +63,6 @@ function loadFlashcardStyling() {
       head.insertAdjacentHTML('beforeend', updatedEl);
     });
 };
-
 
 function loadFlashcardScript() {
 
@@ -76,6 +98,7 @@ function loadFlashcardHTML() {
   body.innerHTML = "";
 
   loadFlashcardStyling();
+  loadBackgroundHTML();
 
   if (index < 3) {
 
