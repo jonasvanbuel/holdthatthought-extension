@@ -1,10 +1,31 @@
-<html style="height: 200px; width: 300px">
+<html style="width: 300px">
   <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="./css/popup.css">
   </head>
-  <body style="margin: 0px">
-    <div id="popup-container" style="height: 100%; width: 100%">
+  <body style="margin: 16px">
+
+    <h3 style="text-align: center;" class="mb-3">Hold That Thought</h3>
+
+    <form action="http://localhost:3000/api/v1/login_return_token" method="get">
+      <div class="form-group">
+        <label for="emailInput">Email</label>
+        <input type="email" class="form-control" id="emailInput" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group">
+        <label for="passwordInput">Password</label>
+        <input type="password" class="form-control" id="passwordInput">
+      </div>
+      <div class="d-flex justify-content-center">
+        <button style="text-align: center;" type="submit" class="btn btn-primary" id="login-btn">Login</button>
+      </div>
+
+    </form>
+
+   <!-- <div id="popup-container" style="height: 100%; width: 100%">
       <h3 style="text-align: center">You blacklisted another website!</h3>
-    </div>
+    </div> -->
+    <script src="./javascript/popup.js"></script>
   </body>
 </html>
