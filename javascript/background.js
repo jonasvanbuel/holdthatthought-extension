@@ -1,7 +1,8 @@
 console.log("background.js running...");
 
-// VARIABLES
 
+// VARIABLES
+// User not logged in upon restart
 let loginEmail = null;
 let loginReturnToken = null;
 
@@ -12,32 +13,45 @@ const blacklist = [
 
 let baseUrl = chrome.runtime.getURL('/');
 
-// MESSAGE PASSING
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+  console.log(tab);
+  if (!loginEmail && !loginReturnToken) {
+    chrome.browserAction.setPopup({
+      "tabId": tabId,
+      "popup": "../views/popup_login.html"
+    });
+  } else {
+    chrome.browserAction.setPopup({
+      "tabId": tabId,
+      "popup": "../views/popup_blacklisted.html"
+    });
+  }
+});
 
-chrome.runtime.onMessage.addListener(
-  function(message, sender, sendResponse) {
+// Set dynamic popup html files
 
-    if (message.request == "blacklist") {
-      // Check url agains blacklist within background.js
-      blacklist.forEach((website) => {
-        if (website == sender.url) {
-          chrome.tabs.sendMessage(sender.tab.id, { response: "blacklisted", baseUrl: baseUrl });
-        };
-      });
-    }
-    // Listen for other requests from content.js
-    else {
-      chrome.tabs.sendMessage(sender.tab.id, { response: "not blacklisted" });
-    }
-  });
-
+// function setPopupHTML() {
+//   if (loginEmail !== null && loginReturnToken !== null) {
+//     // User is logged in
+//     chrome.browserAction.setPopup({
+//       popup: 'views/popup_blacklisted.html'
+//     });
+//   }
+//   else {
+//     chrome.browserAction.setPopup({
+//       popup: 'views/popup_login.html'
+//     });
+//   };
+// };
 
 // CALLED FROM POPUP.JS
 
 function getBlacklists(loginReturnToken) {
+  // FIX API FIRST
+};
 
-
-
+function getFlashcards(loginReturnToken) {
+  // FIX API FIRST
 };
 
 function getLoginReturnToken(emailInput) {
@@ -54,15 +68,42 @@ function getLoginReturnToken(emailInput) {
   fetch(endpoint, myInit)
     .then(response => response.json())
     .then((data) => {
+      setLoginEmail(emailInput);
+      console.log(`Login email set successfully: ${loginEmail}`);
       loginReturnToken = data.message;
-      console.log(`Login return token set successfully...`);
-      // Once login return token received get blacklists
+      console.log(`Login return token set successfully: ${loginReturnToken}`);
+      console.log(`User is now signed in`)
+
+      // Get blacklists
+
+      // Get flashcards
+
     });
+};
+
+function setLoginEmail(emailInput) {
+  loginEmail = emailInput.value;
 };
 
 
 
+// MESSAGE PASSING
+chrome.runtime.onMessage.addListener(
+  function(message, sender, sendResponse) {
 
+    if (message.request == "blacklist") {
+      // Check url agains blacklist within background.js
+      blacklist.forEach((website) => {
+        if (website == sender.url) {
+          chrome.tabs.sendMessage(sender.tab.id, { response: "blacklisted", baseUrl: baseUrl });
+        };
+      });
+    }
+    // Listen for other requests from content.js
+    else {
+      chrome.tabs.sendMessage(sender.tab.id, { response: "not blacklisted" });
+    }
+  });
 
 //Listening to each tab being openened and firing callback function
 // when triggered by conditions

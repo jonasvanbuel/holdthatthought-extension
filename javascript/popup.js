@@ -8,7 +8,13 @@ const loginBtn = document.getElementById('login-btn');
 
 loginBtn.addEventListener("click", function() {
   const emailInput = document.getElementById('emailInput');
+  backgroundScript.setLoginEmail(emailInput);
   backgroundScript.getLoginReturnToken(emailInput);
+
+  // Close popup???
+  // Set different popup html!
+  // Redirect somehow?
+
 });
 
 
