@@ -3,7 +3,6 @@ console.log("popup.js running...");
 // Load background script
 let backgroundScript = chrome.extension.getBackgroundPage();
 
-
 const loginBtn = document.getElementById('login-btn');
 
 loginBtn.addEventListener("click", function() {

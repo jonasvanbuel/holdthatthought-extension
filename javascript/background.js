@@ -2,10 +2,11 @@ console.log("background.js running...");
 
 // VARIABLES
 // User not logged in upon restart
-let loginEmail = null;
-// let loginEmail = "jonas.vanbuel@gmail.com";
-let loginReturnToken = null;
-// let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
+// let loginEmail = null;
+let loginEmail = "jonas.vanbuel@gmail.com";
+// let loginReturnToken = null;
+let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
+
 const baseUrl = chrome.runtime.getURL('/');
 
 let blacklistsArray = null;
@@ -16,7 +17,7 @@ function setPopupViews(tabArray) {
   if (loginEmail && loginReturnToken) {
 
     // HARDCODED
-    let blacklisted = true;
+    let blacklisted = false;
 
     if (blacklisted == true) {
       console.log("Popup view set to popup_blacklisted.html...");
@@ -48,7 +49,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 });
 
 
-// CALLED FROM POPUP.JS
 function getFlashcards() {
   // TO DO!!!
 };
@@ -72,6 +72,33 @@ function getBlacklists() {
       blacklistsArray = addQueryToBlacklists(data);;
     });
 };
+
+function addBlacklist() {
+  chrome.tabs.query({currentWindow: true, active: true}, function(tabArray) {
+
+    let blacklistUrl = tabArray[0].url;
+    console.log(`blacklistUrl: ${blacklistUrl}`);
+
+    let endpoint = "http://localhost:3000/api/v1/blacklists/create";
+    let myInit = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-User-Email': `${loginEmail}`,
+        'X-User-Token': `${loginReturnToken}`,
+        'X-Blacklist-Id': 3
+      }
+    };
+
+    fetch(endpoint, myInit)
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log("New blacklist has been added...")
+      });
+  });
+};
+
 
 function getLoginReturnToken(emailInput) {
 
@@ -155,10 +182,10 @@ chrome.runtime.onMessage.addListener(
             response: "blacklisted",
             baseUrl: baseUrl
           });
-        }
-
+        };
       });
     }
+
     // Listen for other requests from content.js
     else {
       chrome.tabs.sendMessage(sender.tab.id, { response: "not blacklisted" });
