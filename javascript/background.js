@@ -1,10 +1,11 @@
 console.log("background.js running...");
 
-
 // VARIABLES
 // User not logged in upon restart
 let loginEmail = null;
+// let loginEmail = "jonas.vanbuel@gmail.com";
 let loginReturnToken = null;
+// let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
 
 const blacklist = [
   "https://www.instagram.com/",
@@ -13,39 +14,55 @@ const blacklist = [
 
 let baseUrl = chrome.runtime.getURL('/');
 
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-  console.log(tab);
-  if (!loginEmail && !loginReturnToken) {
+
+
+
+
+// SET DYNAMIC POPUP VIEWS
+// Asume user first needs to sign in when extension installed
+// REFACTOR!!!
+if (!loginEmail && !loginReturnToken) {
+  chrome.tabs.query({currentWindow: true, active: true}, function(tabArray) {
+    console.log(tabArray[0]);
     chrome.browserAction.setPopup({
-      "tabId": tabId,
+      "tabId": tabArray[0].id,
       "popup": "../views/popup_login.html"
     });
+  });
+};
+
+// Evaluate popup setting after every tab update
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+  console.log(tab);
+  if (loginEmail && loginReturnToken) {
+
+    // HARDCODED
+    let blacklisted = true;
+
+    if (blacklisted === true) {
+      chrome.browserAction.setPopup({
+        "tabId": tabId,
+        "popup": "../views/popup_blacklisted.html"
+      });
+    } else {
+      chrome.browserAction.setPopup({
+        "tabId": tabId,
+        "popup": "../views/popup_not_blacklisted.html"
+      });
+    };
   } else {
-    chrome.browserAction.setPopup({
-      "tabId": tabId,
-      "popup": "../views/popup_blacklisted.html"
+    chrome.tabs.query({currentWindow: true, active: true}, function(tabArray) {
+      console.log(tabArray[0]);
+      chrome.browserAction.setPopup({
+        "tabId": tabArray[0].id,
+        "popup": "../views/popup_login.html"
+      });
     });
   }
 });
 
-// Set dynamic popup html files
-
-// function setPopupHTML() {
-//   if (loginEmail !== null && loginReturnToken !== null) {
-//     // User is logged in
-//     chrome.browserAction.setPopup({
-//       popup: 'views/popup_blacklisted.html'
-//     });
-//   }
-//   else {
-//     chrome.browserAction.setPopup({
-//       popup: 'views/popup_login.html'
-//     });
-//   };
-// };
 
 // CALLED FROM POPUP.JS
-
 function getBlacklists(loginReturnToken) {
   // FIX API FIRST
 };
@@ -81,10 +98,18 @@ function getLoginReturnToken(emailInput) {
     });
 };
 
+function resetPopupViews() {
+
+}
+
+// HELPER FUNCTIONS
 function setLoginEmail(emailInput) {
   loginEmail = emailInput.value;
 };
 
+function closePopup() {
+  // ???
+};
 
 
 // MESSAGE PASSING
