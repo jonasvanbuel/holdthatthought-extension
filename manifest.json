@@ -1,6 +1,6 @@
 {
   "name": "Hold That Thought",
-  "version": "1.0",
+  "version": "0.0",
   "description": "Enter Hold That Thought description here.",
   "manifest_version": 2,
   "permissions": [
@@ -20,7 +20,7 @@
     }
   ],
   "browser_action": {
-    "default_popup": "popup.html"
+
   },
   "web_accessible_resources": [
     "css/*",

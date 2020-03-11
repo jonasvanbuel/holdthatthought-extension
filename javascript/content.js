@@ -26,6 +26,14 @@ console.log("content.js running...");
 // }
 
 
+
+
+
+
+
+
+
+// MESSAGE PASSING
 // Start listening for messages
 chrome.runtime.onMessage.addListener(
   function(message, sender, sendResponse) {
