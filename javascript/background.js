@@ -2,10 +2,10 @@ console.log("background.js running...");
 
 // VARIABLES
 // User not logged in upon restart
-// let loginEmail = null;
-let loginEmail = "jonas.vanbuel@gmail.com";
-// let loginReturnToken = null;
-let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
+let loginEmail = null;
+// let loginEmail = "jonas.vanbuel@gmail.com";
+let loginReturnToken = null;
+// let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
 
 const baseUrl = chrome.runtime.getURL('/');
 
@@ -86,7 +86,8 @@ function addBlacklist() {
         'Content-Type': 'application/json',
         'X-User-Email': `${loginEmail}`,
         'X-User-Token': `${loginReturnToken}`,
-        'X-Blacklist-Id': 3
+        'X-Blacklist-Id': 3,
+        'X-Blacklist-Url': `${blacklistUrl}`
       }
     };
 
