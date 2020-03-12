@@ -87,8 +87,8 @@ function addBlacklist() {
         'Content-Type': 'application/json',
         'X-User-Email': `${loginEmail}`,
         'X-User-Token': `${loginReturnToken}`,
-        'X-Blacklist-Url': `${blacklistUrl}`,
-        'X-Blacklist-Name': `${getWebsiteName(blacklistUrl)}`
+        'X-Blacklist-Name': `${getWebsiteName(blacklistUrl)}`,
+        'X-Blacklist-Url': `${blacklistUrl}`
       }
     };
 
@@ -96,11 +96,11 @@ function addBlacklist() {
       .then(response => response.json())
       .then((data) => {
         console.log(data);
-        console.log("New blacklist has been added...")
+        console.log("New blacklist has been added...");
+        blacklistsArray = data;
       });
   });
 };
-
 
 function getLoginReturnToken(emailInput) {
 
@@ -140,10 +140,6 @@ function getLoginReturnToken(emailInput) {
 // HELPER FUNCTIONS
 function setLoginEmail(emailInput) {
   loginEmail = emailInput.value;
-};
-
-function closePopup() {
-  // ???
 };
 
 function getWebsiteName(url) {
