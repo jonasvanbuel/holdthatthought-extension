@@ -1,29 +1,52 @@
 console.log("content.js running...");
 
-// let baseUrl = "";
-// function setbaseUrl(string) {
-//   baseUrl = string;
-//   console.log(`baseUrl set successfully: ${baseUrl}`);
-// }
+// INSERT IFRAME
 
-// let iframe =`
-//   <iframe style="position: absolute; right: 16px; top: 16px; z-index: 2147483647; border-radius: 8px; box-shadow: 2px 3px 10px grey" src="chrome-extension://ginifbbapdgbbglelocagabffednffek/views/flashcard.html" width="348" height="331" frameborder="0">This is not working</iframe>
-// `;
+let baseUrl = "";
+let iframeHeightContent = null;
+let flashcardIframe = document.getElementById('flashcard-iframe');
 
-// let boxElement = `
-//   <div style="position: absolute; top: 0px; left; 0px; height: 100vh; width: 100vw; background-color: black; z-index: 2147483646; opacity: 0.8;"></div>
-// `;
+function setbaseUrl(string) {
+  baseUrl = string;
+  console.log(`baseUrl set successfully: ${baseUrl}`);
+};
 
-// function initFlashcardView() {
-//   let body = document.getElementsByTagName("body")[0];
-//   let head = document.getElementsByTagName("head")[0];
+function setIframeHeight(message) {
+  flashcardIframe = document.getElementById('flashcard-iframe');
+  flashcardIframe.height = "";
+  flashcardIframe.height = `${message.iframe_height}px`;
+};
 
-//   body.style.height = "100%";
-//   body.style.overflow = "hidden";
+function iframeLoaded() {
+  let flashcardIframe = document.getElementById('flashcard-iframe');
+  console.log("iframe loaded...");
+  if (flashcardIframe) {
+    let iframeHeight = flashcardIframe.document.body.scrollHeight;
+    console.log(`iframeHeight: ${iframeHeight}`)
+  };
+};
 
-//   body.insertAdjacentHTML('afterbegin', boxElement);
-//   body.insertAdjacentHTML('afterbegin', iframe);
-// }
+
+let iframe =`
+  <iframe width="348" frameborder="0" id="flashcard-iframe" style="position: absolute; right: 16px; top: 16px; z-index: 2147483647; border-radius: 8px; box-shadow: 2px 3px 10px grey" src="chrome-extension://ginifbbapdgbbglelocagabffednffek/views/flashcard.html">This is not working</iframe>
+`;
+
+let boxElement = `
+  <div style="position: absolute; top: 0px; left; 0px; height: 100vh; width: 100vw; background-color: black; z-index: 2147483646; opacity: 0.8;"></div>
+`;
+
+
+function loadFlashcardIframe() {
+  let body = document.getElementsByTagName("body")[0];
+  let head = document.getElementsByTagName("head")[0];
+
+  body.style.height = "100%";
+  body.style.overflow = "hidden";
+
+  body.insertAdjacentHTML('afterbegin', boxElement);
+  body.insertAdjacentHTML('afterbegin', iframe);
+
+};
 
 
 // MESSAGE PASSING
@@ -31,15 +54,20 @@ console.log("content.js running...");
 chrome.runtime.onMessage.addListener(
   function(message, sender, sendResponse) {
     console.log("Receiving message from background.js...")
-    console.log(`message: ${message}`);
+
     if (message.response == "blacklisted") {
       // 1. Set base URL for iframe views
-      // setbaseUrl(message.baseUrl);
+      setbaseUrl(message.baseUrl);
       // 2. Initiate the view
-      loadFlashcardHTML();
-    }
-    else {
-      console.log(message);
+      // loadFlashcardHTML();
+      loadFlashcardIframe();
+    } else if (message.iframe_height) {
+
+      console.log("setting iframe height...");
+      setIframeHeight(message);
+
+    } else {
+      console.log(`message: ${message}`);
     };
   });
 

@@ -2,16 +2,16 @@
 <head>
   <meta charset='UTF-8'>
   <title>Flashcard</title>
-  <link rel='stylesheet' type='text/css' href='chrome-extension://ginifbbapdgbbglelocagabffednffek/css/flashcard.css'>
+  <link rel='stylesheet' type='text/css' href='chrome-extension://ginifbbapdgbbglelocagabffednffek/css/flashcard_iframe.css'>
   <!-- <link rel='stylesheet' type='text/css' href='css/flashcard.css'> -->
 </head>
-<body>
+<body style="padding: 0; margin: 0">
 
-  <!-- LEFT = QUESTION-->
+  <!-- QUESTION-->
 
   <div class='flashcard-window question'>
     <div class='flashcard-category'>
-      <img src='chrome-extension://ginifbbapdgbbglelocagabffednffek/images/rails-logo.svg' alt='Rails logo'>
+      <img src='chrome-extension://ginifbbapdgbbglelocagabffednffek/images/rails-logo.svg' alt='Rails logo' class='rails-logo'>
     </div>
     <div class='text-qa'>
       <p>What does this return?</p>
@@ -20,68 +20,47 @@
       </div>
     </div>
     <textarea class='user-answer' rows='4' placeholder='Enter answer here...'></textarea>
-
     <div class='btn-container'>
       <a href='#' class='flip-btn'>
         <img src="chrome-extension://ginifbbapdgbbglelocagabffednffek/images/redo-solid.svg" alt="redo" class="redo-solid">
         <p>flip</p>
       </a>
     </div>
-
   </div>
 
-  <!-- RIGHT = ANSWER -->
+  <!-- ANSWER -->
 
   <div class='flashcard-window hidden'>
-
     <div class='flashcard-category'>
-      <img src='chrome-extension://ginifbbapdgbbglelocagabffednffek/images/rails-logo.svg' alt='Rails logo'>
+      <img src='chrome-extension://ginifbbapdgbbglelocagabffednffek/images/rails-logo.svg' alt='Rails logo' class='rails-logo'>
     </div>
-
     <div class='text-qa'>
       <p>It generates a PagesController with three actions features, pricing & contact and associated routes and views.</p>
       <div class='code-block'>
-        # create app/controllers/pages_controller.rb
-        # route get 'pages/features'
-        # route get 'pages/pricing'
-        # route get 'pages/contact'
-        # invoke erb
-        # create app/views/pages
-        # create app/views/pages/features.html.erb
-        # create app/views/pages/pricing.html.erb
-        # create app/views/pages/contact.html.erb
+        <ul>
+          <li># create app/controllers/pages_controller.rb</li>
+          <li># route get 'pages/features'</li>
+          <li># route get 'pages/pricing'</li>
+          <li># route get 'pages/contact'</li>
+          <li># route get 'pages/contact'</li>
+          <li># route get 'pages/contact'</li>
+          <li># route get 'pages/contact'</li>
+          <li># [...]</li>
+        </ul>
       </div>
     </div>
-
     <div class='btn-container'>
-
       <a href='#' class='flip-btn'>
         <img src="chrome-extension://ginifbbapdgbbglelocagabffednffek/images/redo-solid.svg" alt="redo" class="redo-solid">
         <p>flip</p>
       </a>
-
       <a href="#" class='next-btn'>
         <p>next</p>
       </a>
-
     </div>
-
   </div>
 
-  <script>
-
-    let flashcardWindows = document.querySelectorAll(".flashcard-window");
-    let flipBtns = document.querySelectorAll(".flip-btn");
-
-    flipBtns.forEach((flipBtn) => {
-      flipBtn.addEventListener("click", function() {
-        flashcardWindows.forEach((flashcardWindow) => {
-          flashcardWindow.classList.toggle("hidden");
-        });
-      });
-    });
-
-  </script>
+  <script src="../javascript/flashcard_iframe_module.js"></script>
 
 </body>
 </html>
