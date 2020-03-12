@@ -69,7 +69,8 @@ function getBlacklists() {
     .then(response => response.json())
     .then((data) => {
       console.log("Blacklists received...");
-      blacklistsArray = addQueryToBlacklists(data);;
+      // blacklistsArray = addQueryToBlacklists(data);
+      blacklistsArray = data;
     });
 };
 
@@ -86,8 +87,8 @@ function addBlacklist() {
         'Content-Type': 'application/json',
         'X-User-Email': `${loginEmail}`,
         'X-User-Token': `${loginReturnToken}`,
-        'X-Blacklist-Id': 3,
-        'X-Blacklist-Url': `${blacklistUrl}`
+        'X-Blacklist-Url': `${blacklistUrl}`,
+        'X-Blacklist-Name': `${getWebsiteName(blacklistUrl)}`
       }
     };
 
@@ -145,25 +146,19 @@ function closePopup() {
   // ???
 };
 
-function addQueryToBlacklists(arr) {
-  let newBlacklistsArray = [];
-  arr.forEach((blacklist) => {
-    let query = blacklist.website_url;
-    // Deleting protocol + www
-    let regexFront = new RegExp('(http:\/\/|https:\/\/|www.)', 'g');
-    while (regexFront.test(query)) {
-      query = query.replace(regexFront, "");
-    };
-    // Search for slashes and delete the end
-    while (query.indexOf('/') >= 0) {
-      query = query.slice(0, query.indexOf('/'));
-    };
-    blacklist["query"] = query;
-    newBlacklistsArray.push(blacklist);
-  });
-  console.log("Query added to blacklistsArray...");
-  console.log(newBlacklistsArray);
-  return newBlacklistsArray;
+function getWebsiteName(url) {
+  website_name = url;
+  // Deleting protocol + www
+  let regexFront = new RegExp('(http:\/\/|https:\/\/|www.)', 'g');
+  while (regexFront.test(website_name)) {
+    website_name = website_name.replace(regexFront, "");
+  };
+  // Search for slashes and delete the end
+  while (website_name.indexOf('/') >= 0) {
+    website_name = website_name.slice(0, website_name.indexOf('/'));
+  };
+  console.log(`Website_name: ${website_name}`);
+  return website_name;
 };
 
 
