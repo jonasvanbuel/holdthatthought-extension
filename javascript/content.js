@@ -12,6 +12,7 @@ function setbaseUrl(string) {
 };
 
 function setIframeHeight(message) {
+  console.log("running setIframeHeight(message)...");
   flashcardIframe = document.getElementById('flashcard-iframe');
   flashcardIframe.height = "";
   flashcardIframe.height = `${message.iframe_height}px`;

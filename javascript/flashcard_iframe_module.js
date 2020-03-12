@@ -22,13 +22,16 @@ const flashcardsArray = [
   }
 ];
 
-let iframeHeight = null;
+let iFrameHeight = null;
 let flashcardWindows = document.querySelectorAll(".flashcard-window");
 let flipBtns = document.querySelectorAll(".flip-btn");
 
 function getIframeHeight() {
+
   iframeHeight = document.body.scrollHeight;
-  console.log(`iframeHeight: ${iframeHeight}`);
+
+  console.log("Changing iframe height...");
+  console.log(`new iframeHeight: ${iframeHeight}`);
   // Then send message from content.js to background script
   // (Requires extension ID - can we set this automatically?)
   chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", {
@@ -50,6 +53,8 @@ flipBtns.forEach((flipBtn) => {
     });
 
     // Get and set iframe height...
-    setTimeout(getIframeHeight(), 100);
+    getIframeHeight();
+    // setTimeout(getIframeHeight(), 100);
+
   });
 });
