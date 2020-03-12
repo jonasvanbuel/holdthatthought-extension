@@ -3,7 +3,6 @@ console.log("popup.js running...");
 // Load background script
 let backgroundScript = chrome.extension.getBackgroundPage();
 
-
 const loginBtn = document.getElementById('login-btn');
 
 loginBtn.addEventListener("click", function() {
@@ -14,10 +13,7 @@ loginBtn.addEventListener("click", function() {
   // Close popup
   window.close();
 
-  // Force recheck URL and reset popup view - call backgroundScript
-
-  // !!! NEED TO FIND A WAY TO PASS CURRENT TAB TO CHANGE POPUP VIEWS !!!
-  // backgroundScript.setPopupViews(tab);
+  // Force re-evaluate popup view from background.js
 });
 
 

@@ -26,15 +26,8 @@ console.log("content.js running...");
 // }
 
 
-
-
-
-
-
-
-
 // MESSAGE PASSING
-// Start listening for messages
+// Start listening for messages from background.js
 chrome.runtime.onMessage.addListener(
   function(message, sender, sendResponse) {
     console.log("Receiving message from background.js...")
@@ -52,6 +45,6 @@ chrome.runtime.onMessage.addListener(
 
 // Then send message from content.js (upon refresh) to background script
 // (Requires extension ID - can we set this automatically?)
-chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", { request: "blacklist" });
+chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", { request: "blacklisted?" });
 
 
