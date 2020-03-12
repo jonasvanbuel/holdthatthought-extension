@@ -16,8 +16,7 @@ function setPopupViews(tabArray) {
   console.log(`tab_id: ${tabArray.id}`);
   if (loginEmail && loginReturnToken) {
 
-    // HARDCODED
-    let blacklisted = false;
+    let blacklisted = checkIfBlacklisted();
 
     if (blacklisted == true) {
       console.log("Popup view set to popup_blacklisted.html...");
@@ -41,16 +40,8 @@ function setPopupViews(tabArray) {
   };
 };
 
-
-// Evaluate popup view for every tab update
-chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-  console.log(tab);
-  setPopupViews(tab);
-});
-
-
+// TO DO!!!
 function getFlashcards() {
-  // TO DO!!!
 };
 
 function getBlacklists() {
@@ -69,7 +60,6 @@ function getBlacklists() {
     .then(response => response.json())
     .then((data) => {
       console.log("Blacklists received...");
-      // blacklistsArray = addQueryToBlacklists(data);
       blacklistsArray = data;
     });
 };
@@ -157,6 +147,27 @@ function getWebsiteName(url) {
   return website_name;
 };
 
+function checkIfBlacklisted() {
+  chrome.tabs.query({currentWindow: true, active: true}, function(tabArray) {
+    let urlToCheck = tabArray[0].url;
+    let result = false;
+
+    blacklistsArray.forEach((blacklist) => {
+      if (blacklist.website_name == getWebsiteName(urlToCheck)) {
+        result = true;
+      };
+    });
+
+    return result;
+  });
+};
+
+
+// Evaluate popup view for every tab update
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
+  console.log(tab);
+  setPopupViews(tab);
+});
 
 // MESSAGE PASSING
 // Start listening for messages from content.js
@@ -168,7 +179,8 @@ chrome.runtime.onMessage.addListener(
       // Check sender.url agains blacklistsArray
       blacklistsArray.forEach((blacklist) => {
 
-        let regexQuery = new RegExp(blacklist.query, 'g');
+        let regexQuery = new RegExp(blacklist.website_name, 'g');
+
         if (regexQuery.test(sender.url)) {
           chrome.tabs.sendMessage(sender.tab.id, {
             response: "blacklisted",
@@ -180,7 +192,7 @@ chrome.runtime.onMessage.addListener(
 
     // Listen for other requests from content.js
     else {
-      chrome.tabs.sendMessage(sender.tab.id, { response: "not blacklisted" });
+      chrome.tabs.sendMessage(sender.tab.id, { response: "Not blacklisted or not logged in" });
     }
   });
 
