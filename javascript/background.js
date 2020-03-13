@@ -2,11 +2,11 @@ console.log("background.js running...");
 
 // VARIABLES
 // User not logged in upon restart
-let loginEmail = null;
-// let loginEmail = "jonas.vanbuel@gmail.com";
-let loginReturnToken = null;
-// let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
-// getBlacklists();
+// let loginEmail = null;
+let loginEmail = "jonas.vanbuel@gmail.com";
+// let loginReturnToken = null;
+let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
+getBlacklists();
 
 const baseUrl = chrome.runtime.getURL('/');
 
@@ -192,9 +192,6 @@ chrome.runtime.onMessage.addListener(
           });
         };
       });
-    } else if (message.iframe_height) {
-      console.log(message);
-      chrome.tabs.sendMessage(sender.tab.id, { iframe_height: `${message.iframe_height}` });
     }
 
     // Listen for other requests from content.js

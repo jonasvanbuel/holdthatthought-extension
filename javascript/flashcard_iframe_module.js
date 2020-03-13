@@ -1,20 +1,26 @@
 console.log("flashcard_iframe_module running...");
 
-let iFrameHeight = null;
-let flashcardWindows = document.querySelectorAll(".flashcard-window");
-let flipBtns = document.querySelectorAll(".flip-btn");
+let flashcardWindow = document.getElementById('flashcard-window');
+let questionAnswer = document.getElementById('question-answer');
+// let flipBtns = document.querySelectorAll(".flip-btn");
+
 
 const flashcardsArray = [
   {
+    id: 1,
     question: "<p>How do you install gems you added to your Gemfile?</p>",
-    answer: `<p>Kill any web server running (Ctrl + C). Run bundle install. Restart the Rails server with rails s.</p>`
+    answer: `<p>Kill any web server running (Ctrl + C). Run bundle install. Restart the Rails server with rails s.</p>`,
+    completed: false
   },
   {
+    id: 2,
     question: `<p>What does this return?</p>
               <div class='code-block'>rails generate controller pages features pricing contact</div>`,
-    answer: "<p>It generates a PagesController with three actions features, pricing and contact and associated routes and views.</p>"
+    answer: "<p>It generates a PagesController with three actions features, pricing and contact and associated routes and views.</p>",
+    completed: false
   },
   {
+    id: 3,
     question: "<p>Which information does rails routes display?</p>",
     answer: `<p>rails routes show you a list of your routes with details</p>
             <ul>
@@ -22,28 +28,18 @@ const flashcardsArray = [
               <li>Verb is the HTTP verb of the route</li>
               <li>URI Pattern is the path of the route</li>
               <li>Controller#Action are targeted controller and method</li>
-            </ul>`
+            </ul>`,
+    completed: false
   }
 ];
 
-function getIframeHeight() {
 
-  iframeHeight = document.body.scrollHeight;
 
-  console.log("Changing iframe height...");
-  console.log(`new iframeHeight: ${iframeHeight}`);
-  // Then send message from content.js to background script
-  // (Requires extension ID - can we set this automatically?)
-  chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", {
-    iframe_height: `${iframeHeight}`
-  });
-};
 
-// Send iframe height upon initial load
-getIframeHeight();
 
-// TODO: Send height every time DOM is updated...
 
+
+// BUTTON EVENT LISTENERS
 flipBtns.forEach((flipBtn) => {
   flipBtn.addEventListener("click", function() {
 
@@ -58,3 +54,14 @@ flipBtns.forEach((flipBtn) => {
 
   });
 });
+
+// Insert next btn when showing answer
+let nextBtn = `
+  <a href="#" class='next-btn'>
+    <p>next</p>
+  </a>
+`;
+
+
+
+
