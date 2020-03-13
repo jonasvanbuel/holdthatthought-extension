@@ -3,29 +3,36 @@
   <meta charset='UTF-8'>
   <title>Flashcard</title>
   <link rel='stylesheet' type='text/css' href='chrome-extension://ginifbbapdgbbglelocagabffednffek/css/flashcard_iframe.css'>
-  <!-- <link rel='stylesheet' type='text/css' href='css/flashcard.css'> -->
+  <!-- <link rel='stylesheet' type='text/css' href='css/flashcard_iframe.css'> -->
 </head>
 <body style="padding: 0; margin: 0">
 
   <!-- QUESTION-->
 
   <div class='flashcard-window question'>
+
     <div class='flashcard-category'>
       <img src='chrome-extension://ginifbbapdgbbglelocagabffednffek/images/rails-logo.svg' alt='Rails logo' class='rails-logo'>
     </div>
+
     <div class='text-qa'>
       <p>What does this return?</p>
       <div class='code-block'>
         rails generate controller pages features pricing contact
       </div>
     </div>
-    <textarea class='user-answer' rows='4' placeholder='Enter answer here...'></textarea>
+
+    <div class="user-answer-container">
+      <textarea class='user-answer-textarea' placeholder='Enter answer here...'></textarea>
+    </div>
+
     <div class='btn-container'>
       <a href='#' class='flip-btn'>
         <img src="chrome-extension://ginifbbapdgbbglelocagabffednffek/images/redo-solid.svg" alt="redo" class="redo-solid">
         <p>flip</p>
       </a>
     </div>
+
   </div>
 
   <!-- ANSWER -->

@@ -1,5 +1,9 @@
 console.log("flashcard_iframe_module running...");
 
+let iFrameHeight = null;
+let flashcardWindows = document.querySelectorAll(".flashcard-window");
+let flipBtns = document.querySelectorAll(".flip-btn");
+
 const flashcardsArray = [
   {
     question: "<p>How do you install gems you added to your Gemfile?</p>",
@@ -21,10 +25,6 @@ const flashcardsArray = [
             </ul>`
   }
 ];
-
-let iFrameHeight = null;
-let flashcardWindows = document.querySelectorAll(".flashcard-window");
-let flipBtns = document.querySelectorAll(".flip-btn");
 
 function getIframeHeight() {
 

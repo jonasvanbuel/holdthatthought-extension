@@ -29,7 +29,7 @@ function iframeLoaded() {
 
 
 let iframe =`
-  <iframe width="348" frameborder="0" id="flashcard-iframe" style="position: absolute; right: 16px; top: 16px; z-index: 2147483647; border-radius: 8px; box-shadow: 2px 3px 10px grey" src="chrome-extension://ginifbbapdgbbglelocagabffednffek/views/flashcard.html">This is not working</iframe>
+  <iframe width="348" height="370" frameborder="0" id="flashcard-iframe" style="position: absolute; right: 16px; top: 16px; z-index: 2147483647; border-radius: 8px; box-shadow: 2px 3px 10px grey" src="chrome-extension://ginifbbapdgbbglelocagabffednffek/views/flashcard.html">This is not working</iframe>
 `;
 
 let boxElement = `
@@ -64,8 +64,8 @@ chrome.runtime.onMessage.addListener(
       loadFlashcardIframe();
     } else if (message.iframe_height) {
 
-      console.log("setting iframe height...");
-      setIframeHeight(message);
+      // console.log("setting iframe height...");
+      // setIframeHeight(message);
 
     } else {
       console.log(`message: ${message}`);
