@@ -1,11 +1,10 @@
 {
   "name": "Hold That Thought",
-  "version": "0.0",
+  "version": "0.0.1",
   "description": "Enter Hold That Thought description here.",
   "manifest_version": 2,
   "permissions": [
-    "tabs",
-    "webNavigation"
+    "tabs"
   ],
   "background": {
     "scripts": [
@@ -16,7 +15,7 @@
   "content_scripts": [
     {
       "matches": [ "<all_urls>" ],
-      "js": [ "javascript/flashcard-module.js", "javascript/content.js" ]
+      "js": [ "javascript/flashcard_iframe_module.js", "javascript/content.js" ]
     }
   ],
   "browser_action": {

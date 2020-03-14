@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600|Open+Sans|Roboto+Mono|Noto+Serif+JP:500,600&display=swap');
+
+.background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #ffeefd;
+}
+
+.background h1 {
+  font-size: 24px;
+  font-family: 'Noto Serif JP', serif;
+  font-weight: 500;
+}
+
+a {
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 18px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  padding: 6px 24px;
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #bbbbbb;
+}
+
+p {
+  margin: 0;
+  margin-bottom: 12px;
+}
+
+.flashcard-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 300px;
+  height: 320px;
+  background-color: #e4e4e4;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  padding: 24px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.flashcard-category {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.rails-logo {
+  width: 60px;
+}
+
+#question,
+#answer {
+  font-size: 14px;
+}
+
+.code-block {
+  background-color: #3c3d3c;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 12px;
+  padding: 12px;
+  width: 276px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.user-answer-container {
+  flex-grow: 2;
+  width: 300px;
+}
+
+#user-answer-textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  padding: 12px;
+  resize: none;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.flip-btn,
+.next-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  margin: 0px 8px;
+}
+
+.flip-btn p,
+.next-btn p {
+  margin: 0;
+}
+
+.redo-solid {
+  height: 16px;
+  margin-right: 8px;
+}
+
+.hidden {
+  display: none;
+}

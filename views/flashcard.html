@@ -1,0 +1,63 @@
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <title>Flashcard</title>
+  <link rel='stylesheet' type='text/css' href='chrome-extension://ginifbbapdgbbglelocagabffednffek/css/flashcard_iframe.css'>
+  <!-- <link rel='stylesheet' type='text/css' href='css/flashcard_iframe.css'> -->
+</head>
+<body style="padding: 0; margin: 0">
+
+  <!-- QUESTION -->
+
+  <div class='flashcard-window' id='question-flashcard-window' style='z-index: 1001'>
+
+    <div class='flashcard-category'>
+      <img src='chrome-extension://ginifbbapdgbbglelocagabffednffek/images/rails-logo.svg' alt='Rails logo' class='rails-logo'>
+    </div>
+
+    <div id='question'>
+    </div>
+
+    <div class="user-answer-container">
+      <textarea id='user-answer-textarea' placeholder='Enter answer here...'></textarea>
+    </div>
+
+    <div class='btn-container'>
+      <a href='#' class='flip-btn' id='question-flip-btn'>
+        <img src="chrome-extension://ginifbbapdgbbglelocagabffednffek/images/redo-solid.svg" alt="redo" class="redo-solid">
+        <p>flip</p>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ANSWER -->
+
+  <div class='flashcard-window hidden' style='z-index: 1000'>
+
+    <div class='flashcard-category'>
+      <img src='chrome-extension://ginifbbapdgbbglelocagabffednffek/images/rails-logo.svg' alt='Rails logo' class='rails-logo'>
+    </div>
+
+    <div id='answer'>
+    </div>
+
+    <div class="user-answer-container">
+    </div>
+
+    <div class='btn-container'>
+      <a href='#' class='flip-btn' id='answer-flip-btn'>
+        <img src="chrome-extension://ginifbbapdgbbglelocagabffednffek/images/redo-solid.svg" alt="redo" class="redo-solid">
+        <p>flip</p>
+      </a>
+      <a href="#" class='next-btn'>
+        <p>next</p>
+      </a>
+    </div>
+
+  </div>
+
+  <script src="../javascript/flashcard_iframe_module.js"></script>
+
+</body>
+</html>

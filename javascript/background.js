@@ -6,6 +6,7 @@ let loginEmail = null;
 // let loginEmail = "jonas.vanbuel@gmail.com";
 let loginReturnToken = null;
 // let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
+// getBlacklists();
 
 const baseUrl = chrome.runtime.getURL('/');
 
@@ -152,13 +153,16 @@ function checkIfBlacklisted() {
     let urlToCheck = tabArray[0].url;
     let result = false;
 
-    blacklistsArray.forEach((blacklist) => {
-      if (blacklist.website_name == getWebsiteName(urlToCheck)) {
-        result = true;
-      };
-    });
-
-    return result;
+    if (blacklistsArray) {
+      blacklistsArray.forEach((blacklist) => {
+        if (blacklist.website_name == getWebsiteName(urlToCheck)) {
+          result = true;
+        };
+      });
+      return result;
+    } else {
+      console.log("Blacklists not yet loaded...");
+    };
   });
 };
 
@@ -188,10 +192,15 @@ chrome.runtime.onMessage.addListener(
           });
         };
       });
+    } else if (message.request == "release url") {
+      chrome.tabs.sendMessage(sender.tab.id, {
+        response: "release url"
+      });
     }
 
     // Listen for other requests from content.js
     else {
+      console.log(message);
       chrome.tabs.sendMessage(sender.tab.id, { response: "Not blacklisted or not logged in" });
     }
   });
