@@ -1,11 +1,10 @@
 {
   "name": "Hold That Thought",
-  "version": "0.0",
+  "version": "0.0.1",
   "description": "Enter Hold That Thought description here.",
   "manifest_version": 2,
   "permissions": [
-    "tabs",
-    "webNavigation"
+    "tabs"
   ],
   "background": {
     "scripts": [

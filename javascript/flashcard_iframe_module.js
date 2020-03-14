@@ -1,10 +1,5 @@
 console.log("flashcard_iframe_module running...");
 
-let flashcardWindow = document.getElementById('flashcard-window');
-let questionAnswer = document.getElementById('question-answer');
-// let flipBtns = document.querySelectorAll(".flip-btn");
-
-
 const flashcardsArray = [
   {
     id: 1,
@@ -33,35 +28,55 @@ const flashcardsArray = [
   }
 ];
 
+let flashcardWindows = document.querySelectorAll('.flashcard-window');
+let question = document.getElementById('question');
+let answer = document.getElementById('answer');
+let userAnswerTextarea = document.getElementById('user-answer-textarea');
+
+let index = 0;
+let currentFlashcardContent = null;
+
+function loadNextFlashcard() {
+  currentFlashcardContent = flashcardsArray[index];
+  if (question && answer) {
+    // SET QUESTION
+    question.innerHTML = "";
+    question.insertAdjacentHTML("afterbegin", currentFlashcardContent["question"]);
+    // SET ANSWER
+    answer.innerHTML = "";
+    answer.insertAdjacentHTML("afterbegin", currentFlashcardContent["answer"]);
+  };
+};
 
 
-
-
-
-
-// BUTTON EVENT LISTENERS
+// FLIP BUTTONS
+let flipBtns = document.querySelectorAll('.flip-btn');
 flipBtns.forEach((flipBtn) => {
-  flipBtn.addEventListener("click", function() {
+  flipBtn.addEventListener('click', function() {
+    flashcardWindows.forEach((flashcardWindow) => {
+      flashcardWindow.classList.toggle('hidden');
+    });
+  });
+});
 
-    // Update DOM
+
+// NEXT BUTTON
+let nextBtn = document.querySelector('.next-btn');
+nextBtn.addEventListener('click', function() {
+  index += 1;
+  if (index < 3) {
+    userAnswerTextarea.innerText = "";
     flashcardWindows.forEach((flashcardWindow) => {
       flashcardWindow.classList.toggle("hidden");
     });
 
-    // Get and set iframe height...
-    getIframeHeight();
-    // setTimeout(getIframeHeight(), 100);
+    loadNextFlashcard();
+  } else if (index == 3) {
+    console.log("Flashcards done. Reload page and don't show flashcards...")
 
-  });
+
+
+  };
 });
 
-// Insert next btn when showing answer
-let nextBtn = `
-  <a href="#" class='next-btn'>
-    <p>next</p>
-  </a>
-`;
-
-
-
-
+loadNextFlashcard();
