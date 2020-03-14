@@ -1,4 +1,6 @@
 console.log("content.js running...");
+let currentUrl = window.location.href;
+console.log(`Current URL: ${currentUrl}`);
 
 // INSERT IFRAME
 
@@ -33,7 +35,7 @@ let iframe =`
 `;
 
 let boxElement = `
-  <div style="position: absolute; top: 0px; left; 0px; height: 100vh; width: 100vw; background-color: black; z-index: 2147483646; opacity: 0.8;"></div>
+  <div id="box-element" style="position: absolute; top: 0px; left; 0px; height: 100vh; width: 100vw; background-color: black; z-index: 2147483646; opacity: 0.8;"></div>
 `;
 
 
@@ -46,7 +48,6 @@ function loadFlashcardIframe() {
 
   body.insertAdjacentHTML('afterbegin', boxElement);
   body.insertAdjacentHTML('afterbegin', iframe);
-
 };
 
 
@@ -62,7 +63,16 @@ chrome.runtime.onMessage.addListener(
       // 2. Initiate the view
       // loadFlashcardHTML();
       loadFlashcardIframe();
-    } else {
+    } else if (message.response == "release url") {
+      let flashcardIframe = document.getElementById('flashcard-iframe');
+      flashcardIframe.parentNode.removeChild(flashcardIframe);
+      let boxElement = document.getElementById('box-element');
+      boxElement.parentNode.removeChild(boxElement);
+      let body = document.getElementsByTagName("body")[0];
+      body.style.height = null;
+      body.style.overflow = null;
+    }
+    else {
       console.log(`message: ${message}`);
     };
   });

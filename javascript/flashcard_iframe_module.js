@@ -1,5 +1,6 @@
 console.log("flashcard_iframe_module running...");
 
+
 const flashcardsArray = [
   {
     id: 1,
@@ -51,32 +52,34 @@ function loadNextFlashcard() {
 
 // FLIP BUTTONS
 let flipBtns = document.querySelectorAll('.flip-btn');
-flipBtns.forEach((flipBtn) => {
-  flipBtn.addEventListener('click', function() {
-    flashcardWindows.forEach((flashcardWindow) => {
-      flashcardWindow.classList.toggle('hidden');
+if (flipBtns) {
+  flipBtns.forEach((flipBtn) => {
+    flipBtn.addEventListener('click', function() {
+      flashcardWindows.forEach((flashcardWindow) => {
+        flashcardWindow.classList.toggle('hidden');
+      });
     });
   });
-});
+};
 
 
 // NEXT BUTTON
 let nextBtn = document.querySelector('.next-btn');
-nextBtn.addEventListener('click', function() {
-  index += 1;
-  if (index < 3) {
-    userAnswerTextarea.innerText = "";
-    flashcardWindows.forEach((flashcardWindow) => {
-      flashcardWindow.classList.toggle("hidden");
-    });
+if (nextBtn) {
+  nextBtn.addEventListener('click', function() {
+    index += 1;
+    if (index < 3) {
+      userAnswerTextarea.innerText = "";
+      flashcardWindows.forEach((flashcardWindow) => {
+        flashcardWindow.classList.toggle("hidden");
+      });
 
-    loadNextFlashcard();
-  } else if (index == 3) {
-    console.log("Flashcards done. Reload page and don't show flashcards...")
-
-
-
-  };
-});
+      loadNextFlashcard();
+    } else if (index == 3) {
+      console.log("Flashcards done. Reload page and don't show flashcards...")
+      chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", { request: "release url" });
+    };
+  });
+};
 
 loadNextFlashcard();
