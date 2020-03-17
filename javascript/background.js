@@ -3,51 +3,58 @@ console.log("background.js running...");
 // VARIABLES
 // User not logged in upon restart
 let loginEmail = null;
-// let loginEmail = "jonas.vanbuel@gmail.com";
 let loginReturnToken = null;
-// let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
-// getBlacklists();
+
 
 const baseUrl = chrome.runtime.getURL('/');
 
 let blacklistsArray = null;
 
+function setPopupViews(tab) {
 
-function setPopupViews(tabArray) {
-  console.log(`tab_id: ${tabArray.id}`);
-  if (loginEmail && loginReturnToken) {
+  console.log(tab);
+  console.log(`tab_id: ${tab.id}`);
+  console.log(`tab_url: ${tab.url}`);
 
-    let blacklisted = checkIfBlacklisted();
+  // If logged in and received blacklistsArray
+  if (loginEmail && loginReturnToken && blacklistsArray) {
 
-    if (blacklisted == true) {
-      console.log("Popup view set to popup_blacklisted.html...");
-      chrome.browserAction.setPopup({
-        "tabId": tabArray.id,
-        "popup": "../views/popup_blacklisted.html"
-      });
-    } else {
-      console.log("Popup view set to popup_not_blacklisted.html...");
-      chrome.browserAction.setPopup({
-        "tabId": tabArray.id,
-        "popup": "../views/popup_not_blacklisted.html"
-      });
-    };
+    console.log('Logged in and received blacklists... Testing if tab.url is blacklisted...');
+
+    console.log("Popup view DEFAULT set to popup_not_blacklisted.html...");
+    chrome.browserAction.setPopup({
+      "tabId": tab.id,
+      "popup": chrome.runtime.getURL('/views/popup_not_blacklisted.html')
+    });
+
+    // Now testing for matches...
+    blacklistsArray.forEach((blacklist) => {
+      let regexQuery = new RegExp(blacklist.website_name, 'g');
+      if (regexQuery.test(tab.url)) {
+
+        // If blacklisted
+        console.log("SUCCESS: Popup view set to popup_blacklisted.html...");
+        chrome.browserAction.setPopup({
+          "tabId": tab.id,
+          "popup": chrome.runtime.getURL('/views/popup_blacklisted.html')
+        });
+
+      };
+    });
   } else {
-      console.log("Popup view set to popup_login.html...");
-      chrome.browserAction.setPopup({
-        "tabId": tabArray.id,
-        "popup": "../views/popup_login.html"
-      });
-  };
-};
 
-// TO DO!!!
-function getFlashcards() {
+    // If not yet logged in
+    console.log("Popup view set to popup_login.html...");
+    chrome.browserAction.setPopup({
+      "tabId": tab.id,
+      "popup": chrome.runtime.getURL('/views/popup_login.html')
+    });
+  }
 };
 
 function getBlacklists() {
 
-  let endpoint = "http://localhost:3000/api/v1/blacklists";
+  let endpoint = "http://www.holdthatthought.xyz/api/v1/blacklists";
   let myInit = {
     method: 'GET',
     headers: {
@@ -71,7 +78,7 @@ function addBlacklist() {
     let blacklistUrl = tabArray[0].url;
     console.log(`blacklistUrl: ${blacklistUrl}`);
 
-    let endpoint = "http://localhost:3000/api/v1/blacklists/create";
+    let endpoint = "http://www.holdthatthought.xyz/api/v1/blacklists/create";
     let myInit = {
       method: 'PATCH',
       headers: {
@@ -95,7 +102,7 @@ function addBlacklist() {
 
 function getLoginReturnToken(emailInput) {
 
-  let endpoint = "http://localhost:3000/api/v1/login_return_token";
+  let endpoint = "http://www.holdthatthought.xyz/api/v1/login_return_token";
   let myInit = {
     method: 'GET',
     headers: {
@@ -148,30 +155,12 @@ function getWebsiteName(url) {
   return website_name;
 };
 
-function checkIfBlacklisted() {
-  chrome.tabs.query({currentWindow: true, active: true}, function(tabArray) {
-    let urlToCheck = tabArray[0].url;
-    let result = false;
-
-    if (blacklistsArray) {
-      blacklistsArray.forEach((blacklist) => {
-        if (blacklist.website_name == getWebsiteName(urlToCheck)) {
-          result = true;
-        };
-      });
-      return result;
-    } else {
-      console.log("Blacklists not yet loaded...");
-    };
-  });
-};
-
 
 // Evaluate popup view for every tab update
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
-  console.log(tab);
   setPopupViews(tab);
 });
+
 
 // MESSAGE PASSING
 // Start listening for messages from content.js
@@ -212,7 +201,7 @@ chrome.runtime.onMessage.addListener(
 //   console.log(event);
 //   // WORKING
 //   // Sending message directly to extension.js
-//   // chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", {status: "insertFrame"});
+//   // chrome.runtime.sendMessage("khnloolbiomiobhojdnncfckgpadenpg", {status: "insertFrame"});
 
 // }, { url: [{hostSuffix: 'instagram.com'}] });
 

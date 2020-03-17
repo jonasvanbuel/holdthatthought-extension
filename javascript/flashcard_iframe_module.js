@@ -77,7 +77,7 @@ if (nextBtn) {
       loadNextFlashcard();
     } else if (index == 3) {
       console.log("Flashcards done. Reload page and don't show flashcards...")
-      chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", { request: "release url" });
+      chrome.runtime.sendMessage("khnloolbiomiobhojdnncfckgpadenpg", { request: "release url" });
     };
   });
 };

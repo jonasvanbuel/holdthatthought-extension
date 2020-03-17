@@ -31,7 +31,7 @@ function iframeLoaded() {
 
 
 let iframe =`
-  <iframe width="348" height="368" frameborder="0" id="flashcard-iframe" style="position: absolute; right: 16px; top: 16px; z-index: 2147483647; border-radius: 8px; box-shadow: 0px 0px 10px grey" src="chrome-extension://ginifbbapdgbbglelocagabffednffek/views/flashcard.html">This is not working</iframe>
+  <iframe width="348" height="368" frameborder="0" id="flashcard-iframe" style="position: absolute; right: 16px; top: 16px; z-index: 2147483647; border-radius: 8px; box-shadow: 0px 0px 10px grey" src="chrome-extension://khnloolbiomiobhojdnncfckgpadenpg/views/flashcard.html">This is not working</iframe>
 `;
 
 let boxElement = `
@@ -61,7 +61,6 @@ chrome.runtime.onMessage.addListener(
       // 1. Set base URL for iframe views
       setbaseUrl(message.baseUrl);
       // 2. Initiate the view
-      // loadFlashcardHTML();
       loadFlashcardIframe();
     } else if (message.response == "release url") {
       let flashcardIframe = document.getElementById('flashcard-iframe');
@@ -79,6 +78,6 @@ chrome.runtime.onMessage.addListener(
 
 // Then send message from content.js (upon refresh) to background script
 // (Requires extension ID - can we set this automatically?)
-chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", { request: "blacklisted?" });
+chrome.runtime.sendMessage("khnloolbiomiobhojdnncfckgpadenpg", { request: "blacklisted?" });
 
 
