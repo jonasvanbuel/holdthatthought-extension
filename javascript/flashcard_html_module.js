@@ -28,8 +28,9 @@ let index = 0;
 function loadBackgroundHTML() {
 
   console.log("Loading background html...");
+  const url = chrome.runtime.getURL('/views/background.html');
 
-  fetch('chrome-extension://ginifbbapdgbbglelocagabffednffek/views/background.html')
+  fetch(url)
     .then(response => response.text())
     .then((data) => {
       // // 2. Parse html string to DOM tree
@@ -51,8 +52,9 @@ function loadBackgroundHTML() {
 function loadFlashcardStyling() {
 
   console.log("Loading flashcard styling...");
+  const url = chrome.runtime.getURL('/css/flashcard.css');
 
-  fetch('chrome-extension://ginifbbapdgbbglelocagabffednffek/css/flashcard.css')
+  fetch(url)
     .then(response => response.text())
     .then((data) => {
       head.innerHTML = "";
@@ -102,8 +104,10 @@ function loadFlashcardHTML() {
 
   if (index < 3) {
 
+    let questionUrl = chrome.runtime.getURL('views/question.html');
+
     // 1. Load question partial as text
-    fetch('chrome-extension://ginifbbapdgbbglelocagabffednffek/views/question.html')
+    fetch(questionUrl)
       .then(response => response.text())
       .then((data) => {
         // 2. Parse html string to DOM tree
@@ -118,24 +122,25 @@ function loadFlashcardHTML() {
         body.insertAdjacentHTML('beforeend', updatedQuestion);
       });
 
-      // 1. Load answer partial as text
-      fetch('chrome-extension://ginifbbapdgbbglelocagabffednffek/views/answer.html')
-        .then(response => response.text())
-        .then((data) => {
-          // 2. Parse html string to DOM tree
-          let domparser = new DOMParser();
-          htmlDoc = domparser.parseFromString(data, 'text/xml');
-          let answer = htmlDoc.querySelector("#answer");
-          // 3. Insert new answer
-          answer.innerHTML = flashcardsArray[index].answer;
-          // 4. Serialize DOM tree to html string
-          let XMLS = new XMLSerializer();
-          let updatedAnswer = XMLS.serializeToString(htmlDoc);
-          body.insertAdjacentHTML('beforeend', updatedAnswer);
+    let answerUrl = chrome.runtime.getURL('views/answer.html');
+    // 1. Load answer partial as text
+    fetch(answerUrl)
+      .then(response => response.text())
+      .then((data) => {
+        // 2. Parse html string to DOM tree
+        let domparser = new DOMParser();
+        htmlDoc = domparser.parseFromString(data, 'text/xml');
+        let answer = htmlDoc.querySelector("#answer");
+        // 3. Insert new answer
+        answer.innerHTML = flashcardsArray[index].answer;
+        // 4. Serialize DOM tree to html string
+        let XMLS = new XMLSerializer();
+        let updatedAnswer = XMLS.serializeToString(htmlDoc);
+        body.insertAdjacentHTML('beforeend', updatedAnswer);
 
-          // ADD SCRIPT TO ELEMENT
-          loadFlashcardScript();
+        // ADD SCRIPT TO ELEMENT
+        loadFlashcardScript();
 
-        });
+      });
   };
 };

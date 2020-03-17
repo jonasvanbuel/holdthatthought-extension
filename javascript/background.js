@@ -157,28 +157,6 @@ function getWebsiteName(url) {
   return website_name;
 };
 
-function checkIfBlacklisted(tab) {
-
-
-
-  // chrome.tabs.query({currentWindow: true, active: true}, function(tabArray) {
-  //   let urlToCheck = tabArray[0].url;
-  //   // console.log(urlToCheck);
-  //   // let result = false;
-
-  //   if (blacklistsArray) {
-  //     blacklistsArray.forEach((blacklist) => {
-  //       if (blacklist.website_name == getWebsiteName(urlToCheck)) {
-  //         return true;
-  //       };
-  //     });
-  //   } else {
-  //     console.log("Blacklists not yet loaded...");
-  //     return false;
-  //   };
-  // });
-};
-
 
 // Evaluate popup view for every tab update
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
