@@ -61,7 +61,6 @@ chrome.runtime.onMessage.addListener(
       // 1. Set base URL for iframe views
       setbaseUrl(message.baseUrl);
       // 2. Initiate the view
-      // loadFlashcardHTML();
       loadFlashcardIframe();
     } else if (message.response == "release url") {
       let flashcardIframe = document.getElementById('flashcard-iframe');
