@@ -2,11 +2,9 @@ console.log("background.js running...");
 
 // VARIABLES
 // User not logged in upon restart
-// let loginEmail = null;
-let loginEmail = "jonas.vanbuel@gmail.com";
-// let loginReturnToken = null;
-let loginReturnToken = "D8G-b_VuKydHzU7_7D4v";
-getBlacklists();
+let loginEmail = null;
+let loginReturnToken = null;
+
 
 const baseUrl = chrome.runtime.getURL('/');
 
@@ -56,7 +54,7 @@ function setPopupViews(tab) {
 
 function getBlacklists() {
 
-  let endpoint = "http://localhost:3000/api/v1/blacklists";
+  let endpoint = "http://www.holdthatthought.xyz/api/v1/blacklists";
   let myInit = {
     method: 'GET',
     headers: {
@@ -80,7 +78,7 @@ function addBlacklist() {
     let blacklistUrl = tabArray[0].url;
     console.log(`blacklistUrl: ${blacklistUrl}`);
 
-    let endpoint = "http://localhost:3000/api/v1/blacklists/create";
+    let endpoint = "http://www.holdthatthought.xyz/api/v1/blacklists/create";
     let myInit = {
       method: 'PATCH',
       headers: {
@@ -104,7 +102,7 @@ function addBlacklist() {
 
 function getLoginReturnToken(emailInput) {
 
-  let endpoint = "http://localhost:3000/api/v1/login_return_token";
+  let endpoint = "http://www.holdthatthought.xyz/api/v1/login_return_token";
   let myInit = {
     method: 'GET',
     headers: {
@@ -203,7 +201,7 @@ chrome.runtime.onMessage.addListener(
 //   console.log(event);
 //   // WORKING
 //   // Sending message directly to extension.js
-//   // chrome.runtime.sendMessage("ginifbbapdgbbglelocagabffednffek", {status: "insertFrame"});
+//   // chrome.runtime.sendMessage("khnloolbiomiobhojdnncfckgpadenpg", {status: "insertFrame"});
 
 // }, { url: [{hostSuffix: 'instagram.com'}] });
 
