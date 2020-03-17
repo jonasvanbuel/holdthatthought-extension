@@ -82,6 +82,7 @@ ul {
 
 .user-answer-container {
   flex-grow: 2;
+  height: 60px;
   width: 300px;
 }
 
