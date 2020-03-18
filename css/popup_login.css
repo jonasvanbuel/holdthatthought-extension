@@ -1,0 +1,76 @@
+/*@import url('https://fonts.googleapis.com/css?family=Bellota:400,700&display=swap');*/
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.popup-login-container {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(240, 239, 239, 1.00);
+  padding: 24px 16px;
+  position: relative;
+}
+
+.HTT-logo {
+  width: 234px;
+}
+
+form {
+  position: absolute;
+  top: 75px;
+  width: 268px;
+  height: 201px;
+  margin-bottom: 24px;
+}
+
+label {
+  font-family: Open Sans;
+  font-size: 14px;
+  color: rgba(25, 41, 101, 1.00);
+  margin-bottom: 6px;
+}
+
+.form-control,
+.form-control:focus {
+  font-family: Open Sans;
+  color: rgba(25, 41, 101, 1.00);
+  font-size: 16px;
+  border: none;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0px 4px 8px rgba(188, 207, 255, 0.5);
+  min-height: 40px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.btn-container {
+  height: 32px;
+  width: 268px;
+  display: flex;
+  justify-content: flex-end;
+  position: absolute;
+  bottom: 0px;
+}
+
+
+.btn-login {
+  background-color: #192965;
+  font-family: Open Sans;
+  font-size: 16px;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 4px;
+  padding-bottom: 8px;
+/*  max-height: 32px;*/
+  border-radius: 30px;
+  box-shadow: 3px 4px 0px #faafff;
+  border: none;
+  text-decoration: none;
+  transition: none;
+}
