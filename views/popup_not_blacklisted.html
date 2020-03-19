@@ -5,23 +5,33 @@
     <link rel="stylesheet" href="../css/popup_general.css">
     <link rel="stylesheet" href="../css/popup_not_blacklisted.css">
   </head>
-  <body style="margin: 16px">
+  <body>
 
-    <div class="container text-center">
-      <div class="d-flex justify-content-center">
-        <h6><small>Account</small></h6>
+    <div class="popup-blacklisted-container">
+
+      <!-- Logo -->
+      <img src="../images/HTT_logo.svg" class="HTT-logo" alt="Hold that thought...">
+
+      <div class="blacklisted-question-container">
+        <p>Do you want to blacklist <span class="website-marked">instagram.com</span> ?</p>
       </div>
 
-      <h4 class="mb-4 mt-3">Would you like to blacklist this website?</h4>
+      <div class="menu-btn-container">
 
-      <div class="d-flex justify-content-around mb-4">
-        <a href="#" class="btn btn-outline-secondary btn-lg" id="yesBtn">Yes</a>
-        <a href="#" class="btn btn-outline-secondary btn-lg" id="noBtn">No</a>
+        <div class="menu-options">
+          <ul>
+            <a href="http://www.holdthatthought.xyz/dashboard"><li>Manage account</li></a>
+            <a href="#"><li>Log out</li></a>
+          </ul>
+        </div>
+
+        <div class="yes-no-container">
+          <a href="#"><img src="../images/times-circle-solid.svg" class="btn-no" alt="No"></a>
+          <a href="#"><img src="../images/check-circle-solid.svg" class="btn-yes" alt="Yes"></a>
+        </div>
+
       </div>
 
-      <div class="d-flex justify-content-center">
-        <h6><small>logout</small></h6>
-      </div>
     </div>
 
     <script src="../javascript/popup_not_blacklisted.js"></script>

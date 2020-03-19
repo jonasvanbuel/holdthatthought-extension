@@ -1,6 +1,7 @@
-/*#popup-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #bbbbbb;
-}*/
+@import url('https://fonts.googleapis.com/css?family=Bellota:300,400,700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+}
+

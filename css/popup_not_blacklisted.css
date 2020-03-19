@@ -1,0 +1,77 @@
+.popup-blacklisted-container {
+  width: 100%;
+  padding: 24px 16px;
+  background-color: #f0efef;
+}
+
+.HTT-logo {
+  width: 174px;
+  margin-bottom: 24px;
+}
+
+.blacklisted-question-container > p {
+  font-family: Bellota;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  color: #192965;
+}
+
+span.website-marked {
+  font-weight: 700;
+  padding: 4px 8px;
+  margin-left: -4px;
+  border-radius: 6px;
+  background-color: #bccfff;
+}
+
+a {
+  text-decoration: none;
+  color: rgba(25, 41, 101, 0.6);
+}
+
+a:hover {
+  text-decoration: none;
+  color: rgba(25, 41, 101, 1);
+}
+
+.menu-btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.menu-options {
+  position: relative;
+  width: 130px;
+}
+
+.menu-options > ul {
+  list-style: none;
+  padding: 0px;
+  position: absolute;
+  bottom: 0px;
+  margin-bottom: 0px;
+  font-size: 12px;
+  font-weight: 300;
+  color: rgba(25, 41, 101, 0.6);
+}
+
+.yes-no-container {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 120px;
+}
+
+.btn-no,
+.btn-yes {
+  height: 50px;
+}
+
+.btn-no:hover,
+.btn-yes:hover {
+
+}
