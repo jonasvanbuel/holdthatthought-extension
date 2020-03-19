@@ -155,6 +155,12 @@ function getWebsiteName(url) {
   return website_name;
 };
 
+function logout() {
+  loginEmail = null;
+  loginReturnToken = null;
+  blacklistsArray = null;
+  console.log("User logged out...");
+};
 
 // Evaluate popup view for every tab update
 chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {

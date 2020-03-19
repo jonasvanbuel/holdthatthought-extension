@@ -1,16 +1,26 @@
-console.log("popup.js running...");
-
-// Load background script
 let backgroundScript = chrome.extension.getBackgroundPage();
 
-let addBlacklistBtn = document.getElementById('yesBtn');
-let noBtn = document.getElementById('noBtn');
+let websiteName = document.getElementById('website-name');
 
-addBlacklistBtn.addEventListener("click", function() {
+let linkLogout = document.getElementById('link-logout');
+
+let btnYes = document.getElementById('btn-yes');
+let btnNo = document.getElementById('btn-no');
+
+chrome.tabs.query({currentWindow: true, active: true}, function(tab) {
+  websiteName.innerText = backgroundScript.getWebsiteName(tab[0].url);
+});
+
+btnYes.addEventListener("click", function() {
   backgroundScript.addBlacklist();
   window.close();
 });
 
-noBtn.addEventListener("click", function() {
+btnNo.addEventListener("click", function() {
+  window.close();
+});
+
+linkLogout.addEventListener('click', function(event) {
+  backgroundScript.logout();
   window.close();
 });
