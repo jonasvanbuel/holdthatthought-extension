@@ -40,6 +40,8 @@ let currentFlashcardContent = null;
 function loadNextFlashcard() {
   currentFlashcardContent = flashcardsArray[index];
   if (question && answer) {
+    // WIPE TEXTAREA
+    userAnswerTextarea.value = "";
     // SET QUESTION
     question.innerHTML = "";
     question.insertAdjacentHTML("afterbegin", currentFlashcardContent["question"]);

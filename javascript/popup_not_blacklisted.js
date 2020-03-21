@@ -7,6 +7,7 @@ let linkLogout = document.getElementById('link-logout');
 let btnYes = document.getElementById('btn-yes');
 let btnNo = document.getElementById('btn-no');
 
+// Filling website name inside popup view...
 chrome.tabs.query({currentWindow: true, active: true}, function(tab) {
   websiteName.innerText = backgroundScript.getWebsiteName(tab[0].url);
 });
