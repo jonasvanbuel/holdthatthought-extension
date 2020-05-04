@@ -6,7 +6,7 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-color: #ffeefd;
+  background-color: rgba(240, 239, 239, 1.00);
 }
 
 .background h1 {
@@ -16,7 +16,7 @@
 }
 
 a {
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(26, 41, 102, 1.00);
   border-radius: 18px;
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
