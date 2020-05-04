@@ -1,5 +1,7 @@
 console.log("background.js running...");
 
+const HOST_URL = 'http://www.holdthatthought.xyz';
+
 // VARIABLES
 // User not logged in upon restart
 let loginEmail = null;
@@ -54,7 +56,7 @@ function setPopupViews(tab) {
 
 function getBlacklists() {
 
-  let endpoint = "http://www.holdthatthought.xyz/api/v1/blacklists";
+  let endpoint = `${HOST_URL}/api/v1/blacklists`;
   let myInit = {
     method: 'GET',
     headers: {
@@ -78,7 +80,7 @@ function addBlacklist() {
     let blacklistUrl = tabArray[0].url;
     console.log(`blacklistUrl: ${blacklistUrl}`);
 
-    let endpoint = "http://www.holdthatthought.xyz/api/v1/blacklists/create";
+    let endpoint = `${HOST_URL}/api/v1/blacklists/create`;
     let myInit = {
       method: 'PATCH',
       headers: {
@@ -100,44 +102,44 @@ function addBlacklist() {
   });
 };
 
-function getLoginReturnToken(emailInput) {
+function getLoginReturnToken(emailInput, passwordInput) {
 
-  let endpoint = "http://www.holdthatthought.xyz/api/v1/login_return_token";
+  let endpoint = `${HOST_URL}/api/v1/login_return_token`;
+
   let myInit = {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'X-User-Email': `${emailInput.value}`
+      'X-User-Email': `${emailInput}`,
+      'X-User-Password': `${passwordInput}`
     }
   };
 
   fetch(endpoint, myInit)
     .then(response => response.json())
     .then((data) => {
-      setLoginEmail(emailInput);
-      console.log(`Login email set successfully: ${loginEmail}`);
-      loginReturnToken = data.message;
-      console.log(`Login return token set successfully: ${loginReturnToken}`);
-      console.log(`User is now signed in`)
-
+      if (data.status === 'SUCCESS') {
+        setLoginEmail(emailInput);
+        loginReturnToken = data.authentication_token;
+        getBlacklists();
+        console.log(`Login email set successfully: ${loginEmail}`);
+        console.log(`Login return token set successfully: ${loginReturnToken}`);
+        console.log(`User is now signed in`);
+      } else {
+        console.log(data.status);
+      }
       // Once login token is received - force change popup view current tab
       // TO DO: FORCE SET POPUP VIEWS OF ALL ACTIVE TABS???
       chrome.tabs.query({currentWindow: true, active: true}, function(tabArray) {
         setPopupViews(tabArray[0]);
       });
-
-      // Get blacklists
-      getBlacklists();
-
-      // Get flashcards
-
     });
 };
 
 
 // HELPER FUNCTIONS
 function setLoginEmail(emailInput) {
-  loginEmail = emailInput.value;
+  loginEmail = emailInput;
 };
 
 function getWebsiteName(url) {

@@ -6,9 +6,10 @@ let backgroundScript = chrome.extension.getBackgroundPage();
 const loginBtn = document.getElementById('login-btn');
 
 loginBtn.addEventListener("click", function() {
-  const emailInput = document.getElementById('emailInput');
+  const emailInput = document.getElementById('emailInput').value;
+  const passwordInput = document.getElementById('passwordInput').value;
   backgroundScript.setLoginEmail(emailInput);
-  backgroundScript.getLoginReturnToken(emailInput);
+  backgroundScript.getLoginReturnToken(emailInput, passwordInput);
 
   // Close popup
   window.close();
